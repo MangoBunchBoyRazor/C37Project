@@ -1,6 +1,6 @@
-var database, reference, drawingData;
+var database, reference, drawingData, saveBtn;
 var drawArr = [], strokeArr = [], toDraw = false;
-var canvas;
+var canvas, form;
 function preload(){
     // Your web app's Firebase configuration
     var firebaseConfig = {
@@ -17,21 +17,19 @@ function preload(){
 }
 function setup(){
     database = firebase.database();
-    reference = database.ref("Drawings");
-    reference.on('value',getData,errData);
 
-    canvas = createCanvas(600,400);
-    canvas.class('canvas');
+    form = new Form();
+    form.getData();
 }
 function draw(){
     background(250);
 
-    textAlign(CENTER);
-    textSize(30);
-    text("Let's Paint together!",width/2,50);
-
+    if(mouseX < 0 && mouseY < 454 && mouseY > 52)
+        canvas.style.marginLeft = 100;
+    else if(mouseX > 102)
+        canvas.style.marginLeft = 50;
     if(toDraw)
-        strokeArr.points.push({x: mouseX, y: mouseY, color: '000000', strokeWeight: 1});
+        strokeArr.points.push({x: mouseX, y: mouseY});
 
     push();
     noFill();
@@ -40,6 +38,8 @@ function draw(){
             beginShape();
             for(j = 0; j < drawArr[i].points.length; j++){
                 let point = drawArr[i].points[j];
+                stroke(drawArr[i].color);
+                strokeWeight(drawArr[i].strokeWeight);
                 vertex(point.x, point.y);
             }
             endShape();
@@ -47,25 +47,25 @@ function draw(){
     }
     pop();
 }
+function saveDrawing(){
+    database.ref('drawings')
+}
 function mousePressed(){
+    if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
     toDraw = true;
     strokeArr = {
-        color: '000000',
-        strokeWeight: 1,
+        color: form.strokeColor.elt.value,
+        strokeWeight: form.strokeWeight.value(),
         points: []
     };
     drawArr.push(strokeArr);
-    canvas.class('canvasD');
+}
 }
 function mouseReleased(){
     if(toDraw)
         toDraw = false;
-    if(canvas.class() == 'canvasD')
-        canvas.class('canvas');
 }
-function getData(data){
-    drawingData = data;
-}
+
 function errData(err){
     console.log(err);
 }

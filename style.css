@@ -1,0 +1,82 @@
+.canvas {
+    border: 2px, solid, blue;
+    cursor: crosshair;
+    margin-left: 50px;
+    margin-top: 40px;
+    transition: all 0.3s;
+}
+#toolsDiv {
+    background-image: linear-gradient(to right, #0000, #ffa5005f  );
+    border-bottom: 2px solid #ffa500af;
+    border-left: 3px solid #ffa5009f;
+    border-right: 3px solid #ff9000;
+    width: 50px;
+    height: 400px;
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    font-family: 'Source Sans Pro';
+    color: orange;
+    transition: 0.2s ease-in-out;
+}
+#toolsDiv .elemts {
+    width: 0px;
+    opacity: 0;
+    transition: 0.3s;
+    color: black;
+    font-weight: 600;
+}
+#nameDiv {
+    background-image: linear-gradient(to bottom, transparent, #ffa5002f);
+    width: 660px;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-bottom: 2px solid #ffa5005f;
+    font-family: 'Roboto Mono';
+    color: orange;
+}
+input[type=text] {
+    display: block;
+    border: none;
+    border-bottom: 2px solid #ffa500;
+    width: 100px;
+    transition: 0.3s ease-out;
+    background: transparent;
+}
+input[type=text]:hover {
+    width: 200px;
+}
+input[type=text]:focus {
+    outline: none;
+}
+button {
+    border: 2px solid orange;
+    border-radius: 5px;
+    background-color: #ffa5002f;
+    transition: 0.5s;
+    font-family: 'Source Sans Pro';
+}
+button:hover {
+    background-color: #ffa500;
+}
+button:focus {
+    outline: none;
+}
+#toolsDiv:hover {
+    width: 100px;
+}
+#toolsDiv:hover .elemts {
+    opacity: 1;
+    width: 44px;
+}
+.fas {
+    color: black;
+    transform: scale(1.6);
+    transition: 0.3s;
+    cursor: pointer;
+}
+#toolsDiv:hover .fas{
+    transform: scale(2) rotate(360deg);
+}
