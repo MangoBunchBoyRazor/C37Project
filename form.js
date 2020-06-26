@@ -6,6 +6,12 @@ class Form{
             this.nameInput = createInput();
             this.nameInput.parent('#nameDiv');
             this.nameInput.attribute('placeholder','name');
+            this.nameInput.input(()=>{
+                for(var i in drawingData){
+                    if(this.nameInput.value() == i)
+                        drawArr = drawingData[i].drawing;
+                }
+            })
             let title = createElement('h2','Let\s Paint!');
                 title.position(270,0);
                 title.parent('#nameDiv');
