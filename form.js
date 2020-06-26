@@ -32,6 +32,21 @@ class Form{
             erase.id('eraser');
             erase.position(15,155);
             erase.mousePressed(()=>drawArr=[]);
+        let download = createElement('i');
+            download.class('fas fa-download');
+            download.parent('#toolsDiv');
+            download.position(15,205);
+            download.mousePressed(()=>{
+                let canvasUrl = this.canvas.elt.toDataURL();
+                let tmpLink = createElement('a');
+                if(this.nameInput.value() !== "")
+                    tmpLink.elt.download = this.nameInput.value()+".png";
+                else
+                    tmpLink.elt.download = "image.png";
+                tmpLink.elt.href = canvasUrl;
+                tmpLink.elt.click();
+                tmpLink.remove();
+            })
         this.strokeColor = createColorPicker('black');
             this.strokeColor.class('elemts');
             this.strokeColor.parent('#toolsDiv');
@@ -50,6 +65,10 @@ class Form{
             label2.attribute('for','#save');
             label2.class('elemts');
             label2.position(50,105);
+        let label3 = createElement('label','Export');
+            label3.parent('#toolsDiv');
+            label3.class('elemts');
+            label3.position(50,205);
         this.canvas = createCanvas(600,400);
         this.canvas.class('canvas');
     }
